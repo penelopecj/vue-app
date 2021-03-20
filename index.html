@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel ="stylesheet" type="text/css" href="./style.css" ></link>
+  <title>Document</title>
+</head>
+<body>
+  <nav></nav>
+
+  <div id="app">
+    <div class="product">
+
+      <div class="product-image">
+        <!-- v-bind omitted -->
+        <img class="grey-box" :src="image" />
+      </div>
+
+      <div class="product-info">
+      <h1>{{ title }}</h1>
+      <p v-if="inventory > 10">In Stock</p>
+      <p v-else-if="inventory <= 10 && inventory > 0">Only {{inventory}} left!</p>
+      <p v-else>Out of Stock</p>
+      <p v-if="onSale">On SALE for just £{{salePrice}}</p>
+      <p v-else>£{{price}}</p>
+
+      <ul>
+        <li v-for="detail in details">
+          {{detail}}
+        </li>
+      </ul>
+
+      <div class="size-select">
+        <p>Please select a size:</p>
+        <select>
+          <option v-for="size in sizes">
+            {{size}}
+          </option>
+        </select>
+      </div>
+
+      <p>Please select a color:</p>
+      <!-- v-bind and v-on omitted -->
+      <div v-for="variant in variants" 
+        :key="variant.variantId"
+        class="color-box"
+        :style="{ backgroundColor: variant.variantColor}"
+        @mouseover="updateProduct(variant.variantImage)">
+      </div>
+
+      <br />
+      <hr />
+
+      <!-- v-bind omitted -->
+      <button v-on:click="addToCart"
+        :class="{ disabledBtn: inventory < 1 }">Add 1 to Cart</button>
+      <button v-on:click="removeFromCart"
+        :class="{ disabledBtn: cart < 1 }">Remove 1 from Cart</button>
+
+      <div class="grey-box">
+        <p>Cart({{cart}})</p>
+      </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<script>
+  var app = new Vue({
+  el: '#app',
+  data: {
+    product: 'Socks',
+    brand: 'Boston Sports',
+    image: './sox.png',
+    price: 19.99,
+    onSale: true,
+    salePrice: 9.99,
+    inventory: 11,
+    cart: 0,
+    details: ['80% cotton', '20% polyester', 'one-size-fits-all'],
+    sizes: ['S', 'M', 'L'],
+    variants: [
+      {
+        variantId: 2234,
+        variantColor: 'red',
+        variantImage: './sox.png'
+      },
+      {
+        variantId: 2235,
+        variantColor: 'blue',
+        variantImage: './bluesox.png'
+      },
+    ],
+  },
+  methods: {
+    addToCart() {
+      if (this.inventory > 0) {
+        this.cart += 1
+        this.inventory -= 1
+      }
+    },
+    removeFromCart() {
+      if (this.cart > 0) {
+        this.cart -= 1
+        this.inventory += 1
+      }
+    },
+    updateProduct(variantImage) {
+      this.image = variantImage
+    }
+  },
+  computed: {
+    title() {
+      return this.brand + ' ' + this.product
+    }
+  }
+})
+
+</script>
