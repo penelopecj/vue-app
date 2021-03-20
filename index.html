@@ -11,7 +11,21 @@
   <nav></nav>
 
   <div id="app">
-    <div class="product">
+    <!-- v-bind omitted -->
+    <product></product>
+  </div>
+
+</body>
+</html>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<script>
+  Vue.component('product', {
+    template: `
+      <div class="product">
 
       <div class="product-image">
         <!-- v-bind omitted -->
@@ -25,6 +39,8 @@
       <p v-else>Out of Stock</p>
       <p v-if="onSale">On SALE for just £{{salePrice}}</p>
       <p v-else>£{{price}}</p>
+
+      <p>Shipping: {{ shipping }}</p>
 
       <ul>
         <li v-for="detail in details">
@@ -64,65 +80,66 @@
       </div>
 
       </div>
-    </div>
-  </div>
+      </div>
+    `,
+    data() {
+      return {
+        product: 'Socks',
+        brand: 'Boston Sports',
+        image: './sox.png',
+        price: 19.99,
+        onSale: true,
+        salePrice: 9.99,
+        inventory: 11,
+        cart: 0,
+        details: ['80% cotton', '20% polyester', 'one-size-fits-all'],
+        sizes: ['S', 'M', 'L'],
+        variants: [
+          {
+            variantId: 2234,
+            variantColor: 'red',
+            variantImage: './sox.png'
+          },
+          {
+            variantId: 2235,
+            variantColor: 'blue',
+            variantImage: './bluesox.png'
+          },
+        ],
+      }
+    },
+    methods: {
+      addToCart() {
+        if (this.inventory > 0) {
+          this.cart += 1
+          this.inventory -= 1
+        }
+      },
+      removeFromCart() {
+        if (this.cart > 0) {
+          this.cart -= 1
+          this.inventory += 1
+        }
+      },
+      updateProduct(variantImage) {
+        this.image = variantImage
+      }
+    },
+    computed: {
+      title() {
+        return this.brand + ' ' + this.product
+      },
+      shipping() {
+        if (this.premium) {
+          return "Free" 
+        } 
+        return `£${2.99}`
+      }
+    }
+  })
 
-</body>
-</html>
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-
-<script>
   var app = new Vue({
-  el: '#app',
-  data: {
-    product: 'Socks',
-    brand: 'Boston Sports',
-    image: './sox.png',
-    price: 19.99,
-    onSale: true,
-    salePrice: 9.99,
-    inventory: 11,
-    cart: 0,
-    details: ['80% cotton', '20% polyester', 'one-size-fits-all'],
-    sizes: ['S', 'M', 'L'],
-    variants: [
-      {
-        variantId: 2234,
-        variantColor: 'red',
-        variantImage: './sox.png'
-      },
-      {
-        variantId: 2235,
-        variantColor: 'blue',
-        variantImage: './bluesox.png'
-      },
-    ],
-  },
-  methods: {
-    addToCart() {
-      if (this.inventory > 0) {
-        this.cart += 1
-        this.inventory -= 1
-      }
-    },
-    removeFromCart() {
-      if (this.cart > 0) {
-        this.cart -= 1
-        this.inventory += 1
-      }
-    },
-    updateProduct(variantImage) {
-      this.image = variantImage
-    }
-  },
-  computed: {
-    title() {
-      return this.brand + ' ' + this.product
-    }
-  }
-})
+  el: '#app'
+  })
 
 </script>
