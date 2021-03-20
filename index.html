@@ -12,7 +12,7 @@
 
   <div id="app">
     <!-- v-bind omitted -->
-    <product></product>
+    <product :premium="premium"></product>
   </div>
 
 </body>
@@ -24,6 +24,12 @@
 
 <script>
   Vue.component('product', {
+    props: {
+      premium: {
+        type: Boolean,
+        required: true
+      }
+    },
     template: `
       <div class="product">
 
@@ -139,7 +145,10 @@
   })
 
   var app = new Vue({
-  el: '#app'
+    el: '#app',
+    data: {
+      premium: true
+    }
   })
 
 </script>
