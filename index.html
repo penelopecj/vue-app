@@ -14,6 +14,8 @@
     <div class="cart">
       <p class="grey-box">Cart({{cart.length}})</p>
     </div>
+    <div class="chart">
+    </div>
     <!-- v-bind omitted -->
     <product :premium="premium"
       @add-to-cart="updateCart"
@@ -83,7 +85,6 @@
       </div>
 
       <br />
-      <hr />
 
       <!-- v-bind omitted -->
       <button v-on:click="addToCart"
@@ -204,7 +205,6 @@
       </div>
 
       <br />
-      <hr />
 
       <!-- v-bind omitted -->
       <button v-on:click="addToCart"
@@ -230,13 +230,13 @@
             variantId: 2236,
             variantColor: 'Green',
             variantImage: './shoe.png',
-            variantQuantity: 7
+            variantQuantity: 50
           },
           {
             variantId: 2237,
             variantColor: 'Purple',
             variantImage: './purpleshoe.png',
-            variantQuantity: 11
+            variantQuantity: 5
           },
         ],
       }
