@@ -1,4 +1,4 @@
-# Kayenta Code Challenge
+# Vue Store App
 
 ## Wins
 * Was able to quickly build a store UI with lots of functionality thanks to Vue.
