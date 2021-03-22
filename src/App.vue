@@ -306,7 +306,7 @@ img {
 }
 
 .cart h3 {
-  color: white; 
+  color: yellowgreen; 
   padding-right: 20px;
   font-size: 1.7rem;
   margin: 0;
