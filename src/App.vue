@@ -52,7 +52,14 @@
       </ul>
     </Product>
 
-    <TypeScript />
+    <TypeScript 
+      :cart="cart"
+      :prices="prices"
+      :redSocks="socksVariants[0].variantId"
+      :blueSocks="socksVariants[1].variantId"
+      :greenShoes="shoesVariants[0].variantId"
+      :purpleShoes="shoesVariants[1].variantId"
+    />
   </div>
 
 </template>
