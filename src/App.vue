@@ -14,6 +14,7 @@
       :variants="socksVariants"
       :inStock="inStock"
       :image="image"
+      :shipping="shipping"
       :cart="cart"
       @updateProduct="updateProduct"
       @updateCart="addToCart"
@@ -32,11 +33,14 @@
       :variants="shoesVariants"
       :inStock="shoeInStock"
       :image="shoeImage"
+      :shipping="shipping"
       :cart="cart"
       @updateProduct="updateShoeProduct"
       @updateCart="addShoeToCart"
       @emptyCart="removeShoeFromCart"
     />
+
+    <TypeScript />
   </div>
 
 </template>
@@ -51,12 +55,14 @@ import purpleshoe from './images/purpleshoe.png'
 
 import Nav from './components/Nav'
 import Product from './components/Product'
+import TypeScript from './components/TypeScript'
 
 export default {
   name: 'App',
   components: {
     Nav,
-    Product
+    Product,
+    TypeScript
   },
   data() {
     return {
@@ -155,22 +161,27 @@ export default {
   },
   computed: {
     image() {
-      return this.socksVariants[this.selectedVariant].variantImage
+      const selectedImage = this.socksVariants[this.selectedVariant].variantImage
+      return selectedImage
     },
     inStock() {
-      return this.socksVariants[this.selectedVariant].variantQuantity
+      const selectedProductQuantity = this.socksVariants[this.selectedVariant].variantQuantity
+      return selectedProductQuantity
     },
     shipping() {
-      if (this.premium) {
+      const userHoldsAPremiumAccount = this.premium
+      if (userHoldsAPremiumAccount) {
         return "Free" 
       } 
       return `£${2.99}`
     },
     shoeImage() {
-      return this.shoesVariants[this.selectedShoeVariant].variantImage
+      const selectedImage = this.shoesVariants[this.selectedShoeVariant].variantImage
+      return selectedImage
     },
     shoeInStock() {
-      return this.shoesVariants[this.selectedShoeVariant].variantQuantity
+      const selectedProductQuantity = this.shoesVariants[this.selectedShoeVariant].variantQuantity
+      return selectedProductQuantity
     }
   },
 }

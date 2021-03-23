@@ -13,7 +13,7 @@
       <p v-if="onSale" class="price">On SALE for just £{{ salePrice }}</p>
       <p v-else class="price">£{{ price }}</p>
 
-      <p class="shipping">Shipping</p>
+      <p class="shipping">{{ shipping }} Shipping</p>
 
       <ul>
         <li v-for="detail in details" :key="detail.id">
@@ -57,20 +57,30 @@
 <script>
 export default {
   name: 'Product',
-  props: [
-    'name',
-    'brand',
-    'selectedVariant',
-    'price',
-    'onSale',
-    'salePrice',
-    'details',
-    'sizes',
-    'variants',
-    'inStock',
-    'image',
-    'cart'
-  ],
+  props: {
+    name: {
+      type: String,
+      default: 'Clothing'
+    },
+    brand: String,
+    selectedVariant: Number,
+    price: {
+      type: Number,
+      default: 19.99
+    },
+    onSale: {
+      type: Boolean,
+      default: false
+    },
+    salePrice: Number,
+    details: Array,
+    sizes: Array,
+    variants: Array,
+    inStock: Number,
+    image: String,
+    shipping: String,
+    cart: Array
+  },
   methods: {
     updateMePlease(index) {
       this.$emit('updateProduct', index)

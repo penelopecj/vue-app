@@ -14,7 +14,7 @@
 
 export default {
   name: 'Nav',
-  props: ['cart']
+  props: { cart: Array }
 }
 
 </script>
