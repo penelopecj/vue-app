@@ -50,6 +50,11 @@
       >Add 1 to Cart</button>
       <button v-on:click="askToRemove"
         :class="{ disabledBtn: cart < 1 }">Remove {{ variants[selectedVariant].variantColor }} {{ name }} from Cart</button>
+
+      <hr />
+      <h4>Top Review:</h4>
+
+      <slot></slot>
     </div>
   </div>
 </template>
@@ -83,13 +88,13 @@ export default {
   },
   methods: {
     updateMePlease(index) {
-      this.$emit('updateProduct', index)
+      this.$emit('update-product', index)
     },
     askToUpdate() {
-      this.$emit('updateCart', this.variants[this.selectedVariant].variantId)
+      this.$emit('update-cart', this.variants[this.selectedVariant].variantId)
     },
     askToRemove() {
-      this.$emit('emptyCart', this.variants[this.selectedVariant].variantId)
+      this.$emit('empty-cart', this.variants[this.selectedVariant].variantId)
     }
   }
 }

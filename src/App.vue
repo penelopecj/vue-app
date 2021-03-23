@@ -16,10 +16,12 @@
       :image="image"
       :shipping="shipping"
       :cart="cart"
-      @updateProduct="updateProduct"
-      @updateCart="addToCart"
-      @emptyCart="removeFromCart"
-    />
+      @update-product="updateProduct"
+      @update-cart="addToCart"
+      @empty-cart="removeFromCart"
+    > 
+      Go Sox! 
+    </Product>
 
     <Product 
       :name="products[1]"
@@ -35,10 +37,12 @@
       :image="shoeImage"
       :shipping="shipping"
       :cart="cart"
-      @updateProduct="updateShoeProduct"
-      @updateCart="addShoeToCart"
-      @emptyCart="removeShoeFromCart"
-    />
+      @update-product="updateShoeProduct"
+      @update-cart="addShoeToCart"
+      @empty-cart="removeShoeFromCart"
+    > 
+      The best shoes ever!
+    </Product>
 
     <TypeScript />
   </div>
