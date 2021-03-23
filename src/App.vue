@@ -20,114 +20,23 @@
       @emptyCart="removeFromCart"
     />
 
-<!--
-    SOCKS
-    <div class="product">
-      <div class="product-image">
-        v-bind omitted
-        <img class="grey-box" :src="image" alt="redsox logo"/>
-      </div>
-
-      <div class="product-info">
-        <h2>{{ brands[0] }} {{ products[0] }}</h2>
-        <p v-if="inStock > 10">In Stock</p>
-        <p v-else-if="inStock <= 10 && inStock > 0">Only {{inStock}} left!</p>
-        <p v-else class="red">Out of Stock</p>
-        <p v-if="onSale[0]" class="price">On SALE for just £{{salePrices[0]}}</p>
-        <p v-else class="price">£{{prices[0]}}</p>
-
-        <p class="shipping">{{ shipping }} Shipping</p>
-
-        <ul>
-          <li v-for="detail in details[0]" :key="detail.id">
-            {{detail}}
-          </li>
-        </ul>
-
-        <div class="size-select">
-          <p>Please select a size:</p>
-          <select>
-            <option v-for="size in sizes[0]" :key="size.id">
-              {{size}}
-            </option>
-          </select>
-        </div>
-
-        <p>Please select a color:</p>
-        v-bind and v-on omitted
-        <div class="flex-wrapper">
-          <div v-for="(variant, index) in socksVariants" 
-            :key="variant.variantId"
-            class="color-box"
-            :style="{ backgroundColor: variant.variantColor}"
-            @mouseover="updateProduct(index)">
-          </div>
-        </div>
-
-        <br />
-
-        v-bind omitted
-        <button v-on:click="addToCart"
-          :class="{ disabledBtn: inStock < 1 }">Add 1 to Cart</button>
-        <button v-on:click="removeFromCart"
-          :class="{ disabledBtn: cart < 1 }">Remove {{ socksVariants[selectedVariant].variantColor }} {{ product }} from Cart</button>
-      </div>
-    </div>
-
-    SHOES
-    <div class="product">
-      <div class="product-image">
-        v-bind omitted
-        <img class="grey-box" :src="shoeImage" alt="shoes"/>
-      </div>
-
-      <div class="product-info">
-        <h2>{{ brands[1] }} {{ products[1] }}</h2>
-        <p v-if="shoeInStock > 10">In Stock</p>
-        <p v-else-if="shoeInStock <= 10 && shoeInStock > 0">Only {{shoeInStock}} left!</p>
-        <p v-else class="red">Out of Stock</p>
-        <p v-if="onSale[1]" class="price">On SALE for just £{{salePrices[1]}}</p>
-        <p v-else class="price">£{{prices[1]}}</p>
-
-        <p class="shipping">{{ shipping }} Shipping</p>
-
-        <ul>
-          <li v-for="detail in details[1]" :key="detail.id">
-            {{detail}}
-          </li>
-        </ul>
-
-        <div class="size-select">
-          <p>Please select a size:</p>
-          <select>
-            <option v-for="size in sizes[1]" :key="size.id">
-              {{size}}
-            </option>
-          </select>
-        </div>
-
-        <p>Please select a color:</p>
-        v-bind and v-on omitted
-        <div class="flex-wrapper">
-          <div v-for="(variant, index) in shoesVariants" 
-            :key="variant.variantId"
-            class="color-box"
-            :style="{ backgroundColor: variant.variantColor}"
-            @mouseover="updateShoeProduct(index)">
-          </div>
-        </div>
-
-        <br />
-
-        v-bind omitted
-        <button v-on:click="addShoeToCart"
-          :class="{ disabledBtn: shoeInStock < 1 }">Add 1 to Cart</button>
-        <button v-on:click="removeShoeFromCart"
-          :class="{ disabledBtn: cart < 1 }">Remove {{ shoesVariants[selectedShoeVariant].variantColor }} {{ product }} from Cart</button>
-      </div>
-    </div>
-  -->
-  
+    <Product 
+      :name="products[1]"
+      :brand="brands[1]"
+      :selectedVariant="selectedShoeVariant"
+      :price="prices[1]"
+      :onSale="onSale[1]"
+      :salePrice="salePrices[1]"
+      :details="details[1]"
+      :sizes="sizes[1]"
+      :variants="shoesVariants"
+      :inStock="shoeInStock"
+      :image="shoeImage"
+      :cart="cart"
+      @updateProduct="updateShoeProduct"
+      @updateCart="addShoeToCart"
+      @emptyCart="removeShoeFromCart"
+    />
   </div>
 
 </template>
@@ -242,12 +151,6 @@ export default {
     },
     shoeInStock() {
       return this.shoesVariants[this.selectedShoeVariant].variantQuantity
-    },
-    shoeShipping() {
-      if (this.premium) {
-        return "Free" 
-      } 
-      return `£${2.99}`
     }
   },
 }
