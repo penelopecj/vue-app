@@ -1,19 +1,30 @@
 <template>
   <div id="app">
-    <nav>    
-      <div class="cart">
-        <div class="flex-wrapper">
-          <img class="logo" src="./images/favicon.png" alt="Vue logo" />
-          <h3>ue Store</h3>
-        </div>
-        <p class="grey-box">Cart({{cart.length}})</p>
-      </div>
-    </nav>
+    <Nav :cart="cart"/>
 
-    <!-- SOCKS -->
+    <Product 
+      :name="products[0]"
+      :brand="brands[0]"
+      :selectedVariant="selectedVariant"
+      :price="prices[0]"
+      :onSale="onSale[0]"
+      :salePrice="salePrices[0]"
+      :details="details[0]"
+      :sizes="sizes[0]"
+      :variants="socksVariants"
+      :inStock="inStock"
+      :image="image"
+      :cart="cart"
+      @updateProduct="updateProduct"
+      @updateCart="addToCart"
+      @emptyCart="removeFromCart"
+    />
+
+<!--
+    SOCKS
     <div class="product">
       <div class="product-image">
-        <!-- v-bind omitted -->
+        v-bind omitted
         <img class="grey-box" :src="image" alt="redsox logo"/>
       </div>
 
@@ -43,7 +54,7 @@
         </div>
 
         <p>Please select a color:</p>
-        <!-- v-bind and v-on omitted -->
+        v-bind and v-on omitted
         <div class="flex-wrapper">
           <div v-for="(variant, index) in socksVariants" 
             :key="variant.variantId"
@@ -55,7 +66,7 @@
 
         <br />
 
-        <!-- v-bind omitted -->
+        v-bind omitted
         <button v-on:click="addToCart"
           :class="{ disabledBtn: inStock < 1 }">Add 1 to Cart</button>
         <button v-on:click="removeFromCart"
@@ -63,10 +74,10 @@
       </div>
     </div>
 
-    <!-- SHOES -->
+    SHOES
     <div class="product">
       <div class="product-image">
-        <!-- v-bind omitted -->
+        v-bind omitted
         <img class="grey-box" :src="shoeImage" alt="shoes"/>
       </div>
 
@@ -96,7 +107,7 @@
         </div>
 
         <p>Please select a color:</p>
-        <!-- v-bind and v-on omitted -->
+        v-bind and v-on omitted
         <div class="flex-wrapper">
           <div v-for="(variant, index) in shoesVariants" 
             :key="variant.variantId"
@@ -108,13 +119,14 @@
 
         <br />
 
-        <!-- v-bind omitted -->
+        v-bind omitted
         <button v-on:click="addShoeToCart"
           :class="{ disabledBtn: shoeInStock < 1 }">Add 1 to Cart</button>
         <button v-on:click="removeShoeFromCart"
           :class="{ disabledBtn: cart < 1 }">Remove {{ shoesVariants[selectedShoeVariant].variantColor }} {{ product }} from Cart</button>
       </div>
     </div>
+  -->
   
   </div>
 
@@ -128,8 +140,15 @@ import bluesox from './images/bluesox.png'
 import greenshoe from './images/shoe.png'
 import purpleshoe from './images/purpleshoe.png'
 
+import Nav from './components/Nav'
+import Product from './components/Product'
+
 export default {
   name: 'App',
+  components: {
+    Nav,
+    Product
+  },
   data() {
     return {
       premium: true,
@@ -248,36 +267,9 @@ body {
   margin: 0;
 }
 
-nav {
-  background: linear-gradient(to right, teal, yellowgreen);
-  width: 100%;
-  height: 60px;
-  margin: 0;
-  position: fixed;
-  top: 0;
-  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.3);
-  padding: 5px 0;
-}
-
-.logo {
-  height: 30px;
-  width: 30px;
-}
-
-.product {
+.flex-wrapper {
   display: flex;
-  justify-content: space-evenly;
-  padding: 20px;
-  margin-top: 5rem;
-}
-
-h2 {
-  color: #2c3e50;
-  font-size: 2rem;
-}
-
-img {
-  width: 300px;
+  align-items: center;
 }
 
 .grey-box {
@@ -285,89 +277,5 @@ img {
   text-align: center;
   margin: 5px;
   padding: 15px;
-}
-
-.color-box {
-  width: 30px;
-  height: 30px;
-  margin-right: 5px;
-  cursor: pointer;
-}
-
-.cart {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 2rem;
-}
-
-.cart p {
-  background-color: white;
-}
-
-.cart h3 {
-  color: yellowgreen; 
-  padding-right: 20px;
-  font-size: 1.7rem;
-  margin: 0;
-  text-transform: uppercase;
-}
-
-button {
-  cursor: pointer;
-  background-color: rgb(14, 141, 238);
-  border: none;
-  border-radius: 10px;
-  padding: 12px;
-  color: white;
-  margin: 5px;
-}
-
-button:hover {
-  background-color: rgb(14, 107, 179);
-}
-
-select {
-  width: 100px;
-  padding: 5px;
-  cursor: pointer;
-}
-
-.disabledBtn {
-  background-color: rgb(196, 196, 196);
-  cursor: default;
-}
-
-.disabledBtn:hover {
-  background-color: rgb(196, 196, 196);
-}
-
-.chart {
-  width: 90%;
-  margin: 2rem auto;
-  height: 500px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid rgb(196, 196, 196);
-}
-
-.shipping {
-  color:rgb(14, 141, 238);
-  font-weight: bold;
-}
-
-.red {
-  color: darkred;
-}
-
-.price {
-  font-weight: bold;
-  font-size: 1.2rem;
-}
-
-.flex-wrapper {
-  display: flex;
-  align-items: center;
 }
 </style>
