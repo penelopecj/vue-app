@@ -1,10 +1,11 @@
 <template>
   <div>
-    <h1>TypeScript section</h1>
   </div>
 </template>
 
 <script lang="ts">
+  const prices: Number[] = []
+  console.log(prices)
 
 
 </script>

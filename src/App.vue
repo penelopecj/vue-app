@@ -20,7 +20,11 @@
       @update-cart="addToCart"
       @empty-cart="removeFromCart"
     > 
-      Go Sox! 
+      <ul class="reviews">
+        <li v-for="review in reviews[0]" v-bind:key="review.id">
+          "{{ review }}"
+        </li>
+      </ul>
     </Product>
 
     <Product 
@@ -41,7 +45,11 @@
       @update-cart="addShoeToCart"
       @empty-cart="removeShoeFromCart"
     > 
-      The best shoes ever!
+      <ul class="reviews">
+        <li v-for="review in reviews[1]" v-bind:key="review.id">
+          "{{ review }}"
+        </li>
+      </ul>
     </Product>
 
     <TypeScript />
@@ -73,6 +81,18 @@ export default {
       premium: true,
       cart: [],
       products: ['Socks', 'Shoes'],
+      reviews: [
+        [
+          'Go sox!',
+          'I love how these two colours go with everything.',
+          'Keep my feet nice and warm!',
+          'Great with sandals.'
+        ],
+        [
+          'The best shoes ever!',
+          'Really stylish, my kids were impressed.'
+        ]
+      ],
       brands: ['Boston Sports', 'Comfort Casual'],
       selectedVariant: 0,
       selectedShoeVariant: 0,
@@ -215,5 +235,18 @@ body {
   text-align: center;
   margin: 5px;
   padding: 15px;
+}
+
+.reviews {
+  list-style: none;
+  padding-left: 0;
+}
+
+.reviews li {
+  margin-bottom: 10px;
+  border: 1px solid rgb(210, 210, 210);
+  padding: 10px;
+  border-radius: 10px;
+  color: rgb(79, 79, 79);
 }
 </style>

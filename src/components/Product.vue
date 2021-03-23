@@ -52,9 +52,10 @@
         :class="{ disabledBtn: cart < 1 }">Remove {{ variants[selectedVariant].variantColor }} {{ name }} from Cart</button>
 
       <hr />
-      <h4>Top Review:</h4>
+      <h4>Top Reviews:</h4>
 
       <slot></slot>
+
     </div>
   </div>
 </template>
@@ -113,6 +114,11 @@ export default {
 h2 {
   color: #2c3e50;
   font-size: 2rem;
+}
+
+h4 {
+  color: #2c3e50;
+  font-size: 1.2rem;
 }
 
 img {
