@@ -103,31 +103,51 @@ export default {
   },
   methods: {
     addToCart() {
-      if (this.socksVariants[this.selectedVariant].variantQuantity > 0) {
-        this.cart.push(this.socksVariants[this.selectedVariant].variantId)
-        this.socksVariants[this.selectedVariant].variantQuantity -= 1
+      const selectedSocks = this.socksVariants[this.selectedVariant]
+
+      if (selectedSocks.variantQuantity > 0) {
+        this.cart.push(selectedSocks.variantId)
+        selectedSocks.variantQuantity -= 1
       }
     },
     removeFromCart() {
+      const selectedSocksInCart = []
+      const selectedSocks = this.socksVariants[this.selectedVariant]
+      const selectedSocksId = this.socksVariants[this.selectedVariant].variantId
+
       this.cart = this.cart.filter(item => {
-        return item !== this.socksVariants[this.selectedVariant].variantId
+        if (item === selectedSocksId) {
+          selectedSocksInCart.push(item)
+        }
+        return item !== selectedSocksId
       })
-      //this.socksVariants[this.selectedVariant].variantQuantity += 1
+
+      selectedSocks.variantQuantity += selectedSocksInCart.length
     },
     updateProduct(index) {
       this.selectedVariant = index
     },
     addShoeToCart() {
-      if (this.shoesVariants[this.selectedShoeVariant].variantQuantity > 0) {
-        this.cart.push(this.shoesVariants[this.selectedShoeVariant].variantId)
-        this.shoesVariants[this.selectedShoeVariant].variantQuantity -= 1
+      const selectedShoes = this.shoesVariants[this.selectedShoeVariant]
+
+      if (selectedShoes.variantQuantity > 0) {
+        this.cart.push(selectedShoes.variantId)
+        selectedShoes.variantQuantity -= 1
       }
     },
     removeShoeFromCart() {
+      const selectedShoesInCart = []
+      const selectedShoes = this.shoesVariants[this.selectedShoeVariant]
+      const selectedShoesId = this.shoesVariants[this.selectedShoeVariant].variantId
+
       this.cart = this.cart.filter(item => {
-        return item !== this.shoesVariants[this.selectedShoeVariant].variantId
+        if (item === selectedShoesId) {
+          selectedShoesInCart.push(item)
+        }
+        return item !== selectedShoesId
       })
-      //this.socksVariants[this.selectedShoeVariant].variantQuantity += 1
+
+      selectedShoes.variantQuantity += selectedShoesInCart.length
     },
     updateShoeProduct(index) {
       this.selectedShoeVariant = index
