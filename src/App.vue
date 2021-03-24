@@ -53,12 +53,18 @@
     </Product>
 
     <TypeScript 
+      :names="products"
+      :brands="brands"
       :cart="cart"
       :prices="prices"
-      :redSocks="socksVariants[0].variantId"
-      :blueSocks="socksVariants[1].variantId"
-      :greenShoes="shoesVariants[0].variantId"
-      :purpleShoes="shoesVariants[1].variantId"
+      :redSocksId="socksVariants[0].variantId"
+      :blueSocksId="socksVariants[1].variantId"
+      :greenShoesId="shoesVariants[0].variantId"
+      :purpleShoesId="shoesVariants[1].variantId"
+      :red="socksVariants[0].variantColor"
+      :blue="socksVariants[1].variantColor"
+      :green="shoesVariants[0].variantColor"
+      :purple="shoesVariants[1].variantColor"
     />
   </div>
 

@@ -2,8 +2,12 @@
   <div class="typescript">
     <div class="grey-box">
       <h3>Your Cart</h3>
-      <p>{{ cart.length }} items</p>
-      <p>Total: £{{ calculateTotal() }}</p>
+      <p class="total">Total Items: {{ cart.length }}</p>
+      <p>{{ items()[0] }} x {{ red }} {{ brands[0] }} {{ names[0] }}</p>
+      <p>{{ items()[1] }} x {{ red }} {{ brands[0] }} {{ names[0] }}</p>
+      <p>{{ items()[2] }} x {{ red }} {{ brands[1] }} {{ names[1] }}</p>
+      <p>{{ items()[3] }} x {{ red }} {{ brands[1] }} {{ names[1] }}</p>
+      <p class="total">Total Price: £{{ calculateTotal() }}</p>
       <button>Proceed to Checkout</button>
     </div>
     
@@ -16,20 +20,46 @@
     name: 'TypeScript',
     props: { 
       cart: Array,
+      names: Array,
+      brands: Array,
       prices: Array,
-      redSocks: Number,
-      blueSocks: Number,
-      greenShoes: Number,
-      purpleShoes: Number,
+      redSocksId: Number,
+      blueSocksId: Number,
+      greenShoesId: Number,
+      purpleShoesId: Number,
+      red: String,
+      blue: String,
+      green: String,
+      purple: String,
     },
     methods: {
-      calculateTotal() {
-        const cartPrices: Number[] = []
-        const socksPrice: Number = this.prices[0]
-        const shoesPrice: Number = this.prices[1]
+      items() {
+        let redSocksCount: number = 0
+        let blueSocksCount: number = 0
+        let greenShoesCount: number = 0
+        let purpleShoesCount: number = 0
 
         this.cart.forEach(item => {
-          if (item === this.redSocks || item === this.blueSocks) {
+          if (item === this.redSocksId) {
+            redSocksCount += 1
+          } else if (item === this.blueSocksId) {
+            blueSocksCount += 1
+          } else if (item === this.greenShoesId) {
+            greenShoesCount += 1
+          } else {
+            purpleShoesCount += 1
+          }
+        })
+
+        return [redSocksCount, blueSocksCount, greenShoesCount, purpleShoesCount]
+      },
+      calculateTotal() {
+        const cartPrices: number[] = []
+        const socksPrice: number = this.prices[0]
+        const shoesPrice: number = this.prices[1]
+
+        this.cart.forEach(item => {
+          if (item === this.redSocksId || item === this.blueSocksId) {
             cartPrices.push(socksPrice)
           } else {
             cartPrices.push(shoesPrice)
@@ -70,7 +100,7 @@ h3 {
   border-radius: 13px 13px 0 0;
 }
 
-p {
+.total {
   font-weight: bold;
 }
 
