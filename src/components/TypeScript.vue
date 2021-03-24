@@ -3,10 +3,11 @@
     <div class="grey-box">
       <h3>Your Cart</h3>
       <p class="total">Total Items: {{ cart.length }}</p>
-      <p>{{ items()[0] }} x {{ red }} {{ brands[0] }} {{ names[0] }}</p>
-      <p>{{ items()[1] }} x {{ red }} {{ brands[0] }} {{ names[0] }}</p>
-      <p>{{ items()[2] }} x {{ red }} {{ brands[1] }} {{ names[1] }}</p>
-      <p>{{ items()[3] }} x {{ red }} {{ brands[1] }} {{ names[1] }}</p>
+      <p v-if="items()[0]">{{ items()[0] }} x {{ red }} {{ brands[0] }} {{ names[0] }}</p>
+      <p v-if="items()[1]">{{ items()[1] }} x {{ blue }} {{ brands[0] }} {{ names[0] }}</p>
+      <p v-if="items()[2]">{{ items()[2] }} x {{ green }} {{ brands[1] }} {{ names[1] }}</p>
+      <p v-if="items()[3]">{{ items()[3] }} x {{ purple }} {{ brands[1] }} {{ names[1] }}</p>
+      <p v-if="!items()">Your cart is empty</p>
       <p class="total">Total Price: £{{ calculateTotal() }}</p>
       <button>Proceed to Checkout</button>
     </div>
@@ -51,7 +52,11 @@
           }
         })
 
-        return [redSocksCount, blueSocksCount, greenShoesCount, purpleShoesCount]
+        if (redSocksCount + blueSocksCount + greenShoesCount + purpleShoesCount === 0) {
+          return false
+        } else {
+          return [redSocksCount, blueSocksCount, greenShoesCount, purpleShoesCount]
+        }
       },
       calculateTotal() {
         const cartPrices: number[] = []
@@ -93,11 +98,11 @@
 }
 
 h3 {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: #2c3e50cd;
   color: white;
   padding: 20px;
   margin-top: 0;
-  border-radius: 13px 13px 0 0;
+  border-radius: 14px 14px 0 0;
 }
 
 .total {
