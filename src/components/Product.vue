@@ -134,16 +134,17 @@ img {
 
 button {
   cursor: pointer;
-  background-color: rgb(14, 141, 238);
+  background: linear-gradient(rgb(14, 141, 238), #354b61);
   border: none;
   border-radius: 10px;
   padding: 12px;
   color: white;
   margin: 5px;
+  font-weight: bold;
 }
 
 button:hover {
-  background-color: rgb(14, 107, 179);
+  background: rgb(14, 107, 179);
 }
 
 select {

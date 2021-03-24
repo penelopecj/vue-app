@@ -3,7 +3,7 @@
       <div class="cart">
         <div class="flex-wrapper">
           <img class="logo" src="../images/favicon.png" alt="Vue logo" />
-          <h3>ue Store</h3>
+          <h3>ue Shoes</h3>
         </div>
         <p class="grey-box">Cart({{ cart.length }})</p>
       </div>
